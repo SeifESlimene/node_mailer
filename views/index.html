@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mailgun App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        box-sizing: border-box;
+      }
+
+      form {
+        width: 400px;
+      }
+
+      .container {
+        margin: 10% 30%;
+      }
+
+      textarea {
+        height: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h5>Please Send Your Request:</h5>
+      <br />
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            aria-describedby="name"
+            placeholder="Enter Name"
+          />
+          <br />
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+          />
+          <small id="emailHelp" class="form-text text-muted"
+            >We'll Never Share Your Email With Anyone Else.</small
+          >
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input
+            type="text"
+            class="form-control"
+            id="subject"
+            aria-describedby="emailHelp"
+            placeholder="Subject"
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea
+            class="form-control"
+            id="message"
+            placeholder="Message"
+          ></textarea>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $("form").on("submit", (e) => {
+        const name = $("#name").val().trim();
+        const email = $("#email").val().trim();
+        const subject = $("#subject").val().trim();
+        const text = $("#message").val().trim();
+
+        const data = {
+          name,
+          email,
+          subject,
+          text,
+        };
+
+        $.post("/email", data, function () {
+          console.log("Server Received Our Data");
+        });
+      });
+    </script>
+  </body>
+</html>
